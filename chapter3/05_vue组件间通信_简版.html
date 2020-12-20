@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue组件间通信_简版 | 尚品汇商城-前台PC</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="shortcut icon" type="image/x-icon" href="/gshop-client_docs/favicon.ico">
+    <meta name="description" content="尚硅谷前端研究院">
+    
+    <link rel="preload" href="/gshop-client_docs/assets/css/0.styles.9c560553.css" as="style"><link rel="preload" href="/gshop-client_docs/assets/js/app.87b8cbcd.js" as="script"><link rel="preload" href="/gshop-client_docs/assets/js/2.f8b636a9.js" as="script"><link rel="preload" href="/gshop-client_docs/assets/js/11.fe2ccf2d.js" as="script"><link rel="prefetch" href="/gshop-client_docs/assets/js/10.4a6478ce.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/12.cb6d6e90.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/13.f2278d7a.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/14.a894e7eb.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/15.0777dc22.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/16.79e161a3.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/17.8e2cfb88.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/18.2f36de16.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/19.2c06f5a3.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/20.cbc51635.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/21.e25bf0d6.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/22.bd96c008.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/23.fd6b72de.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/24.08e25c6f.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/25.66fa05ed.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/26.fd130271.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/27.762faf9b.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/28.7b4b8736.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/29.23aedcca.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/3.d81dda7a.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/30.3d767e08.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/31.fcd9d036.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/32.761afe67.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/33.94993c7a.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/34.ac7c9952.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/35.689e2fe3.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/36.b232a470.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/37.fc8f3af1.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/38.db3087cb.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/39.a7e2c68a.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/4.7315c3ff.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/40.6cb22dd7.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/41.6eb35232.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/42.d45750a0.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/43.054f2c00.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/44.2a9dbf96.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/45.e9738034.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/46.1480b291.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/47.f981d764.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/48.89c215cb.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/5.ebeba0fa.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/6.99ff8bf6.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/7.ed5e1b85.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/8.cc4472e6.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/9.e9902eda.js">
+    <link rel="stylesheet" href="/gshop-client_docs/assets/css/0.styles.9c560553.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/gshop-client_docs/" class="home-link router-link-active"><img src="/gshop-client_docs/logo.png" alt="尚品汇商城-前台PC" class="logo"> <span class="site-name can-hide">尚品汇商城-前台PC</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="http://www.atguigu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="http://www.gulixueyuan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  谷粒学院
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学习路线" class="dropdown-title"><span class="title">学习路线</span> <span class="arrow down"></span></button> <button type="button" aria-label="学习路线" class="mobile-dropdown-title"><span class="title">学习路线</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/web/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  前端
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/kecheng.shtml" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Java
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/bigdata/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  大数据
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="http://www.atguigu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="http://www.gulixueyuan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  谷粒学院
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学习路线" class="dropdown-title"><span class="title">学习路线</span> <span class="arrow down"></span></button> <button type="button" aria-label="学习路线" class="mobile-dropdown-title"><span class="title">学习路线</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/web/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  前端
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/kecheng.shtml" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Java
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/bigdata/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  大数据
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/gshop-client_docs/chapter1/01_准备.html" class="sidebar-link">项目开发前准备</a></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>应用开发详解</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>相关文档</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/gshop-client_docs/chapter3/01_API.html" class="sidebar-link">接口文档(前台PC)</a></li><li><a href="/gshop-client_docs/chapter3/02_Swagger接口列表.html" class="sidebar-link">Swagger接口列表</a></li><li><a href="/gshop-client_docs/chapter3/03_VuePress.html" class="sidebar-link">使用VuePress搭建在线文档网站</a></li><li><a href="/gshop-client_docs/chapter3/04_vee-validate 2.x.html" class="sidebar-link">vee-validate 2.x使用教程</a></li><li><a href="/gshop-client_docs/chapter3/05_vue组件间通信_详版.html" class="sidebar-link">组件间通信详解</a></li><li><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html" class="active sidebar-link">vue组件间通信_简版</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_1-通信方式列表" class="sidebar-link">1. 通信方式列表:</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_2-根据通信的2个组件间的关系来选择一种通信方式" class="sidebar-link">2. 根据通信的2个组件间的关系来选择一种通信方式</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_3-方式一-props" class="sidebar-link">3. 方式一: props</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_4-方式二-vue自定义事件" class="sidebar-link">4. 方式二: vue自定义事件</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_5-方式三-全局事件总线-消息订阅与发布" class="sidebar-link">5. 方式三: 全局事件总线   ===&gt; 消息订阅与发布</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_6-方式四-v-model" class="sidebar-link">6. 方式四: v-model</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_7-方式五-sync" class="sidebar-link">7. 方式五: .sync</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_8-attrs与-listeners" class="sidebar-link">8. $attrs与$listeners</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_9-refs-children-parent" class="sidebar-link">9. $refs &amp; $children &amp; $parent</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_10-provide与inject" class="sidebar-link">10. provide与inject</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_11-vuex" class="sidebar-link">11. Vuex</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter3/05_vue组件间通信_简版.html#_12-插槽-作用域插槽slot-scope" class="sidebar-link">12. 插槽  ==&gt; 作用域插槽slot-scope</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>笔记列表</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vue组件间通信-简版"><a href="#vue组件间通信-简版" class="header-anchor">#</a> vue组件间通信_简版</h1> <h2 id="_1-通信方式列表"><a href="#_1-通信方式列表" class="header-anchor">#</a> 1. 通信方式列表:</h2> <div class="language- extra-class"><pre class="language-text"><code>	1) props
+	2) vue自定义事件
+	3) 全局事件总线
+	4) v-model
+	5) .sync
+	6) $attrs与$listeners
+	7) $ref &amp; $children &amp; $parent
+	8) provide与inject
+	9) Vuex
+	10) 插槽 ==&gt; 作用域插槽
+</code></pre></div><h2 id="_2-根据通信的2个组件间的关系来选择一种通信方式"><a href="#_2-根据通信的2个组件间的关系来选择一种通信方式" class="header-anchor">#</a> 2. 根据通信的2个组件间的关系来选择一种通信方式</h2> <div class="language- extra-class"><pre class="language-text"><code>父子
+		props
+		vue自定义事件
+		v-model
+		.sync
+		$ref, $children与$parent
+		插槽 ==&gt; 作用域插槽
+	祖孙
+		$attrs与$listeners
+		provide与inject
+	兄弟或其它/任意
+		全局事件总线
+		Vuex
+</code></pre></div><h2 id="_3-方式一-props"><a href="#_3-方式一-props" class="header-anchor">#</a> 3. 方式一: props</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 实现父向子通信: 属性值是非函数
+    2). 实现子向父通信: 属性值是函数
+    应用: 最基本, 用得最多的方式
+</code></pre></div><h2 id="_4-方式二-vue自定义事件"><a href="#_4-方式二-vue自定义事件" class="header-anchor">#</a> 4. 方式二: vue自定义事件</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 用来实现子组件向父组件通信
+    2). 相关语法:
+        父组件中绑定自定义事件监听:
+          &lt;Child @eventName=&quot;callback&quot;&gt;
+        子组件中分发事件
+          this.$emit('eventName', data)
+    应用: elment-ui的组件的事件监听语法都用的是自定义事件
+          我们项目中的组件也用了不少自定义事件
+</code></pre></div><h2 id="_5-方式三-全局事件总线-消息订阅与发布"><a href="#_5-方式三-全局事件总线-消息订阅与发布" class="header-anchor">#</a> 5. 方式三: 全局事件总线   ===&gt; 消息订阅与发布</h2> <div class="language- extra-class"><pre class="language-text"><code>	1). 实现任意组件间通信
+    2). 编码:
+        将入口js中的vm作为全局事件总线对象: 
+            beforeCreate() {
+                Vue.prototype.$bus = this
+            }
+        分发事件/传递数据的组件: this.$bus.$emit('eventName', data)
+        处理事件/接收数据的组件: this.$bus.$on('eventName', (data) =&gt; {})
+    应用: 前台项目中使用全局事件总线
+</code></pre></div><p><img src="/gshop-client_docs/assets/img/component&amp;vm.b687475e.png" alt="组件与vm的关系"></p> <h2 id="_6-方式四-v-model"><a href="#_6-方式四-v-model" class="header-anchor">#</a> 6. 方式四: v-model</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 实现父子之间相互通信/同步
+    2). 组件标签上的v-model的本质: 动态value属性与自定义input监听来接收子组件分发的数据更新父组件数据
+        父组件: 
+            &lt;CustomInput v-model=&quot;name&quot;/&gt;
+            &lt;!-- 等价于 --&gt;
+            &lt;CustomInput :value=&quot;name&quot; @input=&quot;name=$event&quot;/&gt;
+        子组件: 
+            &lt;input type=&quot;text&quot; :value=&quot;value&quot; @input=&quot;$emit('input', $event.target.value)&quot;&gt;
+            props: ['value']
+    应用: element-ui中的表单项相关组件都用了v-model: Input / Select / Checkbox / Radio
+</code></pre></div><h2 id="_7-方式五-sync"><a href="#_7-方式五-sync" class="header-anchor">#</a> 7. 方式五: .sync</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 实现父子之间相互通信/同步(在原本父向子的基础上增加子向父)
+    2). 组件标签的属性上使用.sync的本质: 通过事件监听来接收子组件分发过来的数据并更新父组件的数据
+        父组件:
+            &lt;child :money.sync=&quot;total&quot;/&gt;
+            &lt;!-- 等价于 --&gt;
+            &lt;Child :money=&quot;total&quot; @update:money=&quot;total=$event&quot;/&gt;
+    
+            data () {
+              return {
+                total: 1000
+              }
+            },
+        子组件:
+            &lt;button @click=&quot;$emit('update:money', money-100)&quot;&gt;花钱&lt;/button&gt;
+            props: ['money']
+    应用:  
+        element-ui在有显示隐藏的组件上: Dialog / Drawer
+</code></pre></div><h2 id="_8-attrs与-listeners"><a href="#_8-attrs与-listeners" class="header-anchor">#</a> 8. $attrs与$listeners</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). $attrs
+        实现当前组件的父组件向当前组件的子组件通信
+        它是包含所有父组件传入的标签属性(排除props声明, class与style的属性)的对象
+        使用: 通过 v-bind=&quot;$attrs&quot; 将父组件传入的n个属性数据传递给当前组件的子组件
+    2). $listeners
+        实现当前组件的子组件向当前组件的父组件通信
+        $listeners是包含所有父组件传入的自定义事件监听名与对应回调函数的对象
+        使用: 通过v-on=&quot;$listeners&quot; 将父组件绑定给当前组件的事件监听绑定给当前组件的子组件
+    应用: 利用它封装了一个自定义的带hover文本提示的el-button
+</code></pre></div><h2 id="_9-refs-children-parent"><a href="#_9-refs-children-parent" class="header-anchor">#</a> 9. $refs &amp; $children &amp; $parent</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). $refs
+        实现父组件向指定子组件通信
+        $refs是包含所有有ref属性的标签对象或组件对象的容器对象
+        使用: 通过 this.$refs.child 得到子组件对象, 从而可以直接更新其数据或调用其方法更新数据
+    2). $children
+        实现父组件向多个子组件通信
+        $children是所有直接子组件对象的数组
+        使用: 通过this.$children 遍历子组件对象, 从而可以更新多个子组件的数据
+    3). $parent
+        实现子组件向父组件通信
+        $parent是当前组件的父组件对象
+        使用: 通过this.$parent 得到父组件对象, 从而可以更新父组件的数据
+    应用: 在后台管理项目中使用了$refs
+</code></pre></div><h2 id="_10-provide与inject"><a href="#_10-provide与inject" class="header-anchor">#</a> 10. provide与inject</h2> <div class="language- extra-class"><pre class="language-text"><code>	1). 实现祖孙组件间直接通信
+	2). 使用
+		在祖组件中通过provide配置向后代组件提供数据
+		在后代组件中通过inject配置来声明接收数据
+	3). 注意:
+		不太建议在应用开发中使用, 一般用来封装vue插件
+		provide提供的数据本身不是响应式的 ==&gt; 父组件更新了数据, 后代组件不会变化
+		provide提供的数据对象内部是响应式的 ==&gt; 父组件更新了数据, 后代组件也会变化
+	应用: element-ui中的Form组件中使用了provide和inject
+</code></pre></div><h2 id="_11-vuex"><a href="#_11-vuex" class="header-anchor">#</a> 11. Vuex</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 实现任意组件间通信
+    2). Vuex 是一个专为 Vue 应用程序设计的管理多组件共享状态数据的 Vue 插件
+        任意组件都可以读取到Vuex中store的state对象中的数据
+        任意组件都可以通过dispatch()或commit()来触发store去更新state中的数据
+        一旦state中的数据发生变化, 依赖于这些数据的组件就会自动更新
+    应用: 前台和后台项目都有用vuex管理组件数据 
+</code></pre></div><h2 id="_12-插槽-作用域插槽slot-scope"><a href="#_12-插槽-作用域插槽slot-scope" class="header-anchor">#</a> 12. 插槽  ==&gt; 作用域插槽slot-scope</h2> <div class="language- extra-class"><pre class="language-text"><code>    1). 实现父组件向子组件传递标签内容
+    2). 什么情况下使用作用域插槽?
+        父组件需要向子组件传递标签结构内容
+        但决定父组件传递怎样标签结构的数据在子组件中
+    3). 编码:
+        子组件:
+            &lt;slot :row=&quot;item&quot; :$index=&quot;index&quot;&gt;  &lt;!-- slot的属性会自动传递给父组件 --&gt;
+            &lt;/slot&gt;
+        父组件:
+            &lt;template slot-scope=&quot;{row, $index}&quot;&gt;
+                &lt;span&gt;{{$index+1}}&lt;/span&gt; &amp;nbsp;&amp;nbsp;
+                &lt;span :style=&quot;{color: $index%2===1 ? 'blue' : 'green'}&quot; &gt;{{row.text}}&lt;/span&gt;
+            &lt;/template&gt;
+    应用: element-ui中的Table组件
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/gshop-client_docs/chapter3/05_vue组件间通信_详版.html" class="prev">
+        组件间通信详解
+      </a></span> <span class="next"><a href="/gshop-client_docs/chapter4/day01.html">
+        day01
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/gshop-client_docs/assets/js/app.87b8cbcd.js" defer></script><script src="/gshop-client_docs/assets/js/2.f8b636a9.js" defer></script><script src="/gshop-client_docs/assets/js/11.fe2ccf2d.js" defer></script>
+  </body>
+</html>
