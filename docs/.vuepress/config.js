@@ -1,8 +1,8 @@
 // 注意: base的值为github仓库的名称(/不能少)
 module.exports = {
-  base: '/atguigu_utils-docs/', /* 基础虚拟路径 */
+  base: '/gshop-client_docs/', /* 基础虚拟路径 */
   dest: 'docs/dist', /* 打包文件基础路径, 在命令所在目录下 */
-  title: '自定义工具函数库', // 标题
+  title: '尚品汇商城-前台PC', // 标题
   description: '尚硅谷前端研究院', // 标题下的描述
   
   themeConfig: { // 主题配置
@@ -20,37 +20,62 @@ module.exports = {
       },
     ],
     sidebar: [ // 左侧导航
+      'chapter1/01_准备',
       {
-        title: '打包自定义工具库', // 标题
-        collapsable: false, // 下级列表不可折叠
-        children: [ // 下级列表
-          'chapter1/01_工具函数库说明',
-          'chapter1/02_创建工具包项目',
-          'chapter1/03_发布到npm中央仓库',
-          'chapter1/04_使用自定义工具包',
+        title: '应用开发详解',
+        collapsable: true,
+        children: [
+          'chapter2/01_开启项目开发',
+          'chapter2/02_项目源码目录设计',
+          'chapter2/03_ESLint',
+          'chapter2/04_使用git管理项目',
+          'chapter2/05_Vue组件化',
+          'chapter2/06_引入vue-router',
+          'chapter2/07_引入less预编译器',
+          'chapter2/08_Header组件',
+          'chapter2/09_Footer组件',
+          'chapter2/10_Home路由组件',
+          'chapter2/11_后台应用',
+          'chapter2/12_前后台交互ajax',
+          'chapter2/13_使用vuex管理状态',
+          'chapter2/14_异步显示分类列表 TypeNav',
+          'chapter2/15_Mock(模拟)数据接口',
+          'chapter2/16_利用Mock接口实现动态的Home',
+          'chapter2/17_Search路由',
+          'chapter2/18_Detail路由',
+          'chapter2/19_AddCartSuccess路由',
+          'chapter2/20_ShopCart路由',
+          'chapter2/21_注册与登陆路由',
+          'chapter2/22_导航守卫',
+          'chapter2/23_订单与支付',
         ]
       },
       {
-        title: '各种自定义',
-        collapsable: false,
+        title: '相关文档',
+        collapsable: true,
         children: [
-          'chapter2/01_函数相关',
-          'chapter2/02_数组相关',
-          'chapter2/03_对象相关',
-          'chapter2/04_字符串相关',
-          'chapter2/05_手写继承',
-          'chapter2/06_手写带委托的事件监听',
-          'chapter2/07_手写ajax请求函数',
-          'chapter2/08_手写事件总线',
-          'chapter2/09_手写消息订阅与发布',
-          'chapter2/10_手写Promise',
+          'chapter3/01_API',
+          'chapter3/02_Swagger接口列表',
+          'chapter3/03_VuePress',
+          'chapter3/04_vee-validate 2.x',
+          'chapter3/05_vue组件间通信_详版',
+          'chapter3/05_vue组件间通信_简版',
         ]
       },
       {
-        title: '快速搭建在线文档网站',
-        collapsable: false,
+        title: '笔记列表',
+        collapsable: true,
         children: [
-          'chapter3/',
+          'chapter4/day01',
+          'chapter4/day02',
+          'chapter4/day03',
+          'chapter4/day04',
+          'chapter4/day05',
+          'chapter4/day06',
+          'chapter4/day07',
+          'chapter4/day08',
+          'chapter4/day09',
+          'chapter4/项目总结',
         ]
       },
     ],
