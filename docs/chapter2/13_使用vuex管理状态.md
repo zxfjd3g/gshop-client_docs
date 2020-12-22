@@ -14,6 +14,8 @@ import {reqBaseCategoryList} from '@/api'
 
 const state = {
   baseCategoryList: [], // 所有分类的数组
+  xxx: 'abc',
+  yyy: 123
 }
 
 const mutations = {
@@ -49,19 +51,46 @@ export default {
 }
 ```
 
-## 13.3. store/modules/index.js
+
+
+## 13.3. store/modules/home.js
+
+```js
+/* 
+vuex管理的用户模块
+*/
+export default {
+  state: {
+    userInfo: {}
+  },
+  actions: {},
+  mutations: {},
+  getters: {}
+}
+```
+
+
+
+## 13.4. store/modules/index.js
+
 ```js
 /* 
 收集所有vuex管理的模块
 */
-import home from './home'
+import home from './home'
+import user from './user'
+
 // 向外暴露包含所有vuex管理的模块的对象
-export default{
-  home,
+export default {
+  home,
+  user
 }
 ```
 
+
+
 ## 13.4. store/index.js
+
 ```js
 /* 
 Vuex最核心的管理对象store
@@ -90,3 +119,7 @@ new Vue({
 ```
 
  
+
+## 13.6. 使用调试工具查看state数据
+
+![image-20201222212813157](./images/image-20201222212813157.png)

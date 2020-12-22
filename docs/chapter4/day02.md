@@ -2,9 +2,10 @@
 ## 今日任务
     1). Home组件及其子组件(静态)
     2). 后台接口与使用postman测试接口
-    3). ajax与后台进行交互
+    3). axios二次封装与接口请求函数封装
     4). 使用vuex管理组件状态数据
-    5). TypeNavx组件动态展现
+    5). TypeNav组件动态展现
+    6). TypeNav纯前台(与用户)交互效果
 
 ## Home组件及其子组件(静态)
     1). TypeNav: 3级分类导航
@@ -23,19 +24,22 @@
     4). 保存测试接口 ==> 后面可以反复使用
 
 ## ajax与后台进行交互
-    1). 下载依赖包: npm install -S axios nprogress
+    1). 下载依赖包: npm install axios nprogress
+    
     2). axios的二次封装(axios本身就是对XHR原生ajax的封装)     面试必说
-        1.配置通用的基础路径和超时
-            const intance = axios.create({baseURL, timeout})  // intance是一个能发ajax请求的函数
-            向外暴露的必须是instance
-        2.显示请求进度条
-            显示: 在请求拦截器回调中执行: NProgress.start()
-            隐藏: 在请求完成后的成功或失败回调中执行: NProgress.done()
-        3.成功返回的数据不再是response, 而直接是响应体数据response.data
-            在响应拦截器成功回调中: return response.data
-        4.统一处理请求错误, 具体请求也可以选择处理或不处理
-            在响应拦截器失败的回调中: 提法错误信息, 抛出error或返回失败的promise
-
+    	1. 配置通用的基础路径和超时时间
+    		axios.create({
+    			baseURL: '/api',
+    			timeout: 20000
+    		})
+    	2. 显示请求进度条
+    		显示: 在请求拦截器回调中执行: NProgress.start()
+    		隐藏: 在请求完成后的成功或失败回调中执行: NProgress.done()
+    	3. 成功返回的不再是repsonse, 而直接是响应休数据: response.data
+    		在响应拦截器成功回调中: return response.data
+    	4. 统一处理请求错误, 具体请求可以选择处理或不处理
+    		在响应拦截器失败的回调中: 提法错误信息, 抛出error或返回失败的promise
+    
     3). 接口请求函数模块
         包含项目中所有接口对应的ajax请求函数
         函数的返回值是promise, 函数内部调用ajax模块发请求
@@ -46,9 +50,9 @@
             axios配置请求地址: /api/product/getBaseCategoryList
             发请求所在的基础url: http://localhost:8080
             http://localhost:8080/api/product/getBaseCategoryList(没有处理, 就404)
-            后台接口的地址: http://182.92.128.115/api/product/getBaseCategoryList(没有处理)
+            后台接口的地址: http://39.99.186.36/api/product/getBaseCategoryList(没有处理)
         解决办法1: 使用CORS解决ajax请求跨域
-            给axios指定正确的地址: baseURL: http://182.92.128.115/api
+            给axios指定正确的地址: baseURL: http://39.99.186.36/api
             这样ajax请求就跨域了: 服务器返回特别的响应头
                 Access-Control-Allow-Origin: http://localhost:8080
                 Access-Control-Allow-Credentials: true
@@ -57,28 +61,31 @@
                 devServer: {
                   proxy: {
                     '/api': { // 只对请求路由以/api开头的请求进行代理转发
-                      target: 'http://182.92.128.115', // 转发的目标url
+                      target: 'http://39.99.186.36', // 转发的目标url
                       changeOrigin: true // 支持跨域
                     }
                   }
                 },
-            baseURL: baseURL: '/api'
+            配置baseURL: baseURL: '/api'
 
 ## 使用vuex管理组件状态数据
-    vuex用来做什么?
+    1) vuex用来做什么?
         vuex用来管理多个组件共享的状态数据
         从后台动态获取数据
-    vuex的基本使用
+    
+    2) vuex的基本使用
         store相关: index / state / mutations / actions / getters 
         注册store: vm中注册store  ==> 组件中通过$store得到store对象
         组件:  通过$store来读取或更新vuex管理的state数据
               也可以通过mapState() / mapGetters() / mapMutations() / mapActions()
-    vuex的多模块编程的必要性
+    
+    3) vuex的多模块编程的必要性
         vuex单模块问题: 需要的管理状态数据比较多, 那对应的mutations/actions模块就会变得比较大
             如果添加新的数据管理, 需要修改现在文件(不断向其添加内容) 
         vuex多模块编程: 对各个功能模块的数据分别进行管理, 这样更加具有扩展性
         什么时候需要用vuex多模块编程?  需要vuex管理的数据比较多时使用
-    多模块编程的总state结构:
+    
+    4) 多模块编程的总state结构:
         {
             home:{
                 categoryList: [], // 分类列表
@@ -89,7 +96,8 @@
                 userInfo: {}
             }
         }
-    针对三级分类使用vuex管理
+    
+    5) 针对三级分类使用vuex管理
         api: reqCategoryList
         vuex: home.js中编写
             异步action: 

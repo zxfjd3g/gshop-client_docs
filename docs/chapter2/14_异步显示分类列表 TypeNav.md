@@ -12,151 +12,301 @@
 8. 利用标签自定义属性携带动态数据
 9. 控制一级列表的显示与隐藏
 10. 一级列表显示隐藏的过渡效果
-11. 优化请求执行的位置, 减少请求次数
 12. 合并分类query参数与搜索的关键字params参数
 
+
+
+## 14.2. 下载依赖包
+
+```shell
+npm i lodash
+```
+
+
+
 ## 14.2. 编码实现
+
+1. components/TypeNav/index.vue
+
 ```vue
 <template>
-  <div class="type-nav">
-    <div class="container" @mouseenter="isShow=true" @mouseleave="hideCategorys">
-      <h2 class="all">全部商品分类</h2>
-      <nav class="nav">
-        <a href="###">服装城</a>
-        <a href="###">美妆馆</a>
-        <a href="###">尚品汇超市</a>
-        <a href="###">全球购</a>
-        <a href="###">闪购</a>
-        <a href="###">团购</a>
-        <a href="###">有趣</a>
-        <a href="###">秒杀</a>
-      </nav>
-      <div class="sort" v-if="isShow">
-        <div class="all-sort-list2" @click="toSearch">
-          <div class="item" 
-               v-for="(c1, index) in baseCategoryList" 
-               :key="c1.categoryId"
-               :class="{'item-on': index===currentIndex}" 
-               @mouseenter="showCategorys(index)">
-            <h3>
-              <!-- <router-link :to="{path: '/search', query:{categoryName: c1.categoryName}}">{{c1.categoryName}}</router-link> -->
-              <a href="javascript:" 
-                :data-categoryName="c1.categoryName" 
-                :data-category1Id="c1.categoryId">{{c1.categoryName}}</a>
-            </h3>
-            <div class="item-list clearfix">
-              <div class="subitem">
-                <dl class="fore" 
-                    v-for="(c2, index) in c1.categoryChild" 
-                    :key="c2.categoryId">
-                  <dt>
-                    <!-- <router-link :to="{path: '/search', query:{categoryName: c2.categoryName}}">{{c2.categoryName}}</router-link> -->
-                    <a href="javascript:" 
-                      :data-categoryName="c2.categoryName"
-                      :data-category2Id="c2.categoryId">{{c2.categoryName}}</a>
-                  </dt>
-
-                  <dd>
-                    <em v-for="(c3, index) in c2.categoryChild" :key="c3.categoryId">
-                      <!-- <router-link :to="{path: '/search', query:{categoryName: c3.categoryName}}">{{c3.categoryName}}</router-link> -->
-                      <a href="javascript:" 
-                        :data-categoryName="c3.categoryName"
-                        :data-category3Id="c3.categoryId">{{c3.categoryName}}</a>
-                    </em>
-                  </dd>
-                </dl>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- 商品分类导航 -->
+  <div class="type-nav">
+    <div class="container">
+      <div @mouseleave="hideList" @mouseenter="isShowFirst=true">
+        <h2 class="all">全部商品分类</h2>
+        <transition name="slide">
+          <div class="sort" v-show="isShowFirst">
+            <div class="all-sort-list2" @click="toSearch">
+              <div
+                class="item"
+                v-for="(c1, index) in categoryList"
+                :key="c1.categoryId"
+                :class="{active: index===currentIndex}"
+                @mouseenter="showSubList(index)"
+              >
+                <h3>
+                  <a
+                    href="javascript:"
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
+                  >{{c1.categoryName}}</a>
+                  <!-- <router-link :to="`/search?category1Id=${c1.categoryId}&categoryName=${c1.categoryName}`">{{c1.categoryName}}</router-link> -->
+                </h3>
+                <div class="item-list clearfix">
+                  <div class="subitem">
+                    <dl class="fore" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
+                      <dt>
+                        <a
+                          href="javascript:"
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
+                        >{{c2.categoryName}}</a>
+                        <!-- <router-link :to="`/search?category2Id=${c2.categoryId}&categoryName=${c2.categoryName}`">{{c2.categoryName}}</router-link> -->
+                      </dt>
+                      <dd>
+                        <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
+                          <a
+                            href="javascript:"
+                            :data-categoryName="c3.categoryName"
+                            :data-category3Id="c3.categoryId"
+                          >{{c3.categoryName}}</a>
+                          <!-- <router-link :to="`/search?category3Id=${c3.categoryId}&categoryName=${c3.categoryName}`">{{c3.categoryName}}</router-link> -->
+                        </em>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+      <nav class="nav">
+        <a href="###">服装城</a>
+        <a href="###">美妆馆</a>
+        <a href="###">尚品汇超市</a>
+        <a href="###">全球购</a>
+        <a href="###">闪购</a>
+        <a href="###">团购</a>
+        <a href="###">有趣</a>
+        <a href="###">秒杀</a>
+      </nav>
+    </div>
+  </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  // import _ from 'lodash'
-  import throttle from 'lodash/throttle'
-  export default {
-    name: 'TypeNav',
+// import _ from 'lodash'
+import throttle from "lodash/throttle";
+import { mapState } from "vuex";
 
-    data () {
-      return {
-        currentIndex: -1, // 当前一级分类的下标(基2/3级分类需要显示)
-        isShow: false, // 是否显示一级列表
-      }
-    },
+export default {
+  name: "TypeNav",
 
-    mounted () {
-      // 如果请求的路径是根路径则显示一级分类列表
-      this.isShow = this.$route.path==='/'
+  data() {
+    return {
+      currentIndex: -1,
+      isShowFirst: false // 是否显示一级列表
+    };
+  },
 
-      // 异步获取所有分类列表数据  
-      // this.$store.dispatch('getBaseCategoryList') // 在App组件中执行, 减少请求的次数
-    },
+  computed: {
+    ...mapState({
+      categoryList: state => state.home.baseCategoryList
+    })
+  },
 
-    computed: {
-      // 从vuex管理的state中读取数据到当前组件
-      ...mapState({
-        // 读取home模块的所有分类数组
-        baseCategoryList: state => state.home.baseCategoryList
-      })
-    },
+  created() {
+    this.isShowFirst = this.$route.path === "/";
+  },
 
-    methods: {
-      /* 
-      显示当前分类的下级分类列表 (不做节流处理)
-      */
-      /* 
-      showCategorys (index) {
-        console.log('showCategorys', index)
+  methods: {
+    hideList() {
+      this.currentIndex = -1;
+      if (this.$route.path !== "/") {
+        this.isShowFirst = false;
+      }
+    },
 
-        this.currentIndex = index
-      }, 
-      */
+    // showSubList: _.throttle(function (index) {
+    showSubList: throttle(
+      function(index) {
+        console.log("----", index);
+        this.currentIndex = index;
+      },
+      200,
+      { trailing: false }
+    ),
 
-      /* 
-      显示当前分类的下级分类列表 (使用lodash做节流处理)
-      */
-      // showCategorys: _.throttle(function (index) {
-      showCategorys: throttle(function (index) {
-        // console.log('showCategorys', index)
-        this.currentIndex = index
-      }, 200), // 间隔时间为200ms
+    /* 
+    点击跳转去搜索界面
+    */
+    toSearch(event) {
+      // 得到事件源标签上的自定义属性
+      const {
+        categoryname,
+        category1id,
+        category2id,
+        category3id
+      } = event.target.dataset;
+      // console.log(categoryname)
+      // 如果有分类名称, 说明点击的是某个分类项
+      if (categoryname) { 
+        // 准备query参数
+        const query = { categoryName: categoryname };
+        if (category1id) {
+          query.category1Id = category1id
+        } else if (category2id) {
+          query.category2Id = category2id
+        } else if (category3id) {
+          query.category3Id = category3id
+        } 
 
-      /* 
-      隐藏显示的2/3级分类列表
-      */
-      hideCategorys () {
-        this.currentIndex = -1
-        // 如果当前不是是home就隐藏一级分类列表
-        if (this.$route.path!=='/') {
-          this.isShow = false
-        }
-      },
+        // 准备用于跳转路由的目标location对象
+        const location = { 
+          path: "/search", 
+          query, 
+          params: this.$route.params // 携带上原本就有的params参数
+        }
 
-      toSearch (event) {
-        // 得到事件源标签上的自定义属性
-        const { categoryname, category1id, category2id, category3id } = 
-              event.target.dataset
-        // console.log(categoryname)
-        // 如果有分类名称, 说明点击的是某个分类项
-        if (categoryname) {
-          // 准备query参数
-          const query = {categoryName: categoryname}
-          if (category1id) {
-            query.category1Id = category1id
-          } else if (category2id) {
-            query.category2Id = category2id
-          } else if (category3id) {
-            query.category3Id = category3id
-          }
-          // 跳转到搜索路由, 携带准备的query参数
-          this.$router.push({path: '/search', query})
-        }
-      }
-    }
-  }
+        // 跳转到搜索路由
+        this.$router.push(location)
+      }
+    }
+  }
+};
 </script>
+
+<style  lang="less" scoped>
+.type-nav {
+  border-bottom: 2px solid #e1251b;
+
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    position: relative;
+
+    .all {
+      width: 210px;
+      height: 45px;
+      background-color: #e1251b;
+      line-height: 45px;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .nav {
+      a {
+        height: 45px;
+        margin: 0 22px;
+        line-height: 45px;
+        font-size: 16px;
+        color: #333;
+      }
+    }
+
+    .sort {
+      position: absolute;
+      left: 0;
+      top: 45px;
+      width: 210px;
+      height: 461px;
+      position: absolute;
+      background: #fafafa;
+      z-index: 999;
+
+      &.slide-enter-active, &.slide-leave-active {
+        transition: all 0.3s;
+      }
+      &.slide-enter, &.slide-leave-to {
+        opacity: 0;
+        height: 0
+      }
+
+      .all-sort-list2 {
+        .item {
+          h3 {
+            line-height: 30px;
+            font-size: 14px;
+            font-weight: 400;
+            overflow: hidden;
+            padding: 0 20px;
+            margin: 0;
+
+            a {
+              color: #333;
+            }
+          }
+
+          .item-list {
+            display: none;
+            position: absolute;
+            width: 734px;
+            min-height: 460px;
+            _height: 200px;
+            background: #f7f7f7;
+            left: 210px;
+            border: 1px solid #ddd;
+            top: 0;
+            z-index: 9999 !important;
+
+            .subitem {
+              float: left;
+              width: 650px;
+              padding: 0 4px 0 8px;
+
+              dl {
+                border-top: 1px solid #eee;
+                padding: 6px 0;
+                overflow: hidden;
+                zoom: 1;
+
+                &.fore {
+                  border-top: 0;
+                }
+
+                dt {
+                  float: left;
+                  width: 54px;
+                  line-height: 22px;
+                  text-align: right;
+                  padding: 3px 6px 0 0;
+                  font-weight: 700;
+                }
+
+                dd {
+                  float: left;
+                  width: 550px;
+                  padding: 3px 0 0;
+                  overflow: hidden;
+
+                  em {
+                    float: left;
+                    height: 14px;
+                    line-height: 14px;
+                    padding: 0 8px;
+                    margin-top: 5px;
+                    border-left: 1px solid #ccc;
+                  }
+                }
+              }
+            }
+          }
+
+          &.active {
+            background: #ccc;
+            .item-list {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
 ```
