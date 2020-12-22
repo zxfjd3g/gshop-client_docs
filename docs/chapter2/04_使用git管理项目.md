@@ -38,27 +38,22 @@
 ## 4.2. 多分支操作
 
 ```shell
-## 1). 创建本地开发分支, 并推送到远程
-    git checkout -b dev
-    git push -u origin dev
+## 1). 创建本地个人开发分支, 并推送到远程
+    git checkout -b atguigu
+    git push -u origin atguigu
 
-## 2). 创建本地个人分支(不用推送到远程)
-    git checkout -b xfzhang
-
-## 3). 在个人分支上开发, 合并到dev分支并推送
+## 3). 在个人开发分支上开发, 并推送到远程
     git add .
     git commit -m "xxx"
-    git checkout dev
-    git merge xfzhang
     git push
 
-## 4). 根据远程dev分支创建本地dev分支
+## 4). 根据远程个人开发分支创建本地个人开发分支
     git pull  (如果分支是在clone后创建的才需要执行)
-    git checkout -b dev origin/dev
+    git checkout -b atguigu origin/atguigu
 
-## 5). 将dev分支合并到master
+## 5). 将个人开发分支合并到master
     git checkout master
-    git merge dev
+    git merge atguigu
     git push
 ```
 

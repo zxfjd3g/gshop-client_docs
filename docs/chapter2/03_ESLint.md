@@ -39,21 +39,18 @@
 1. package.json : 全局规则配置文件
 
 ```js
-'rules': {
-   'no-new': 'off'
+"rules": {
+    "no-unused-vars": "off"
 }
 ```
 
 
 
-1. 在js/vue文件中修改局部规则
+2. 在js/vue文件中修改局部规则
 
 ```js
-/* eslint-disable no-new */
-new Vue({
-    el: '#app',
-    render => h(App)
-})
+/* eslint-disable no-unused-vars */
+var xxx = 123
 ```
 
  
@@ -61,8 +58,10 @@ new Vue({
 3. vue.config.js: 关闭规则检查
 
 ```js
-lintOnSave: false, // 关闭ESLint的规则检查
-lintOnSave: 'warning', // 输出提示错误, 但项目继续运行
+module.exports = {
+  // lintOnSave: false, // 关闭ESLint的规则检查
+  lintOnSave: 'warning', // 输出提示错误, 但项目继续运行
+}
 ```
 
  

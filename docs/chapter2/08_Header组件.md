@@ -5,7 +5,7 @@
 ![img](./images/wps1.jpg) 
 
 1. 使用声明式路由导航与编程式路由导航
-2. 携带params参数
+2. 跳转路由与携带参数相关问题
 3. 解决编程式路由重复导航的一个错误
 
 ## 8.2. Header组件编码
@@ -48,8 +48,8 @@
         <form class="searchForm">
           <input type="text" id="autocomplete" class="input-error input-xxlarge" 
           	v-model="keyword"/>
-          <button class="sui-btn btn-xlarge btn-danger" type="button" 
-          	@click.prevent="search">搜索</button>
+          <button class="sui-btn btn-xlarge btn-danger" @click.prevent="search">
+              搜索</button>
         </form>
       </div>
     </div>
@@ -178,21 +178,12 @@
 
 
 
-## 8.3. router/routes.js
-- 问题: 如何实现params参数可传可不传?
-```js
-{
-    path: '/search/:keyword?', // params参数可传可不传
-    component: Search
-},
-```
-
-## 8.4. Search组件编码
+## 8.3. Search组件编码
 ```vue
 <div>搜索关键字: {{$route.params.keyword}}</div>
 ```
 
-## 8.5. 路由跳转与传参相关问题
+## 8.4. 路由跳转与传参相关问题
 
 1. 跳转路由的2种基本方式
 
@@ -215,9 +206,12 @@
 - 对象: push({})  // 也可以带参数
 
 ```js
+// 字符串方式
+this.$router.push(`/search/${keyword}?keyword2=${keyword.toUpperCase()}`)
+
+// 对象方式
 this.$router.push({
     name: 'search', 
-    // path: '/search/keyword',
     params: {keyword},
     query: {keyword2: keyword.toUpperCase()}
 })
@@ -235,25 +229,75 @@ this.$router.push({
 5. 如何实现params参数可传可不传?
 
 - 配置路由路径的params部分时用?: path: '/search/:keyword?'
+
 - 只有params参数有值时, 才指定params配置(不要携带一个值为空串的params参数)
 
+  ```js
+  {
+      path: '/search/:keyword?', // params参数可传可不传
+      component: Search
+  },
+  ```
 
+  ```js
+  search() {
+    const {keyword} = this
+    
+    /* push(path) */
+    // if (keyword) {
+    //   this.$router.push(`/search/${keyword}?keyword2=${keyword.toUpperCase()}`)
+    // } else {
+    //   this.$router.push(`/search`)
+    // }
+    
+    /* push(options) */
+    const location = {
+      name: "search",
+    }
+    if (keyword) {
+      location.params = { keyword }
+      location.query = {
+        keyword2: this.keyword.toUpperCase()
+      }
+    }
+  
+    this.$router.push(location)
+  }
+  ```
+
+  ```vue
+  <h3>params.keyword: {{$route.params.keyword}}</h3>
+  <h3>query.keyword2: {{$route.query.keyword2}}</h3>
+  ```
+
+  
 
 6. 路由组件能不能传递props数据
 
 - 可以, 通过路由的props配置指定
-- 路由配置: props: route => ({keyword3: route.params.keyword, keyword4: route.query.keyword2})
+
+- 路由配置:  将路由跳转的params/query参数/自定义参数映射成props传递给路由组件
+
+  ```js
+  props: route => ({keyword3: route.params.keyword, keyword4: route.query.keyword2})
+  ```
+
 - 组件读取: 接收props属性必须声明
-  - props: ['keyword3', 'keyword4']
-  - {{keyword3}} / this.keyword3
+  ```js
+  props: ['keyword3', 'keyword4']
+  
+  {{keyword3}} / this.keyword3
+  ```
+
+  
 
 
 
 
-## 8.7. 重复跳转路由的错误
+## 8.5. 重复跳转路由的错误
 1. 问题: 
 
-  ![image-20201219141655333](./images/image-20201219141655333.png)
+![image-20201219141655333](./images/image-20201219141655333.png)
 
   编程式路由跳转到当前路径且参数没有变化时会抛出 NavigationDuplicated(重复导航) 错误
 

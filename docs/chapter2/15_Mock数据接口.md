@@ -17,30 +17,7 @@ b. value
 c. value可以变, 但结构不能变
 
 ### 2) 编写模拟JSON数据
-a. 首页广告轮播数据: src/mock/banners.json
-
-```
-[
-    {
-        "id":"1",
-        "imgUrl":"/images/banner1.jpg"
-    },
-    {
-        "id":"2",
-        "imgUrl":"/images/banner2.jpg"
-    },
-    {
-        "id":"3",
-        "imgUrl":"/images/banner3.jpg"
-    },
-    {
-        "id":"4",
-        "imgUrl":"/images/banner4.jpg"
-    }
-]
-```
-
-b. 首页楼层数据: src/mock/floors.json
+a. 首页楼层数据: src/mock/floors.json
 ```
 [
   {
