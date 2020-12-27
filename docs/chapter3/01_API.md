@@ -387,11 +387,11 @@ POST
 
 /api/cart/checkCart/{skuID}/{isChecked}
 
-### 8.2. 请求方式
+### 7.2. 请求方式
 
 GET
 
-### 8.3. 参数类型
+### 7.3. 参数类型
 
 | 参数名称  | 类型   | 是否必选 | 描述                               |
 | --------- | ------ | -------- | ---------------------------------- |
@@ -871,4 +871,56 @@ GET
 }
 ```
 
+
+
+## 18. 首页广告轮播
+
+### 18.1. 请求地址
+
+/api/cms/banner
+
+### 18.2. 请求方式
+
+GET
+
+### 18.3. 参数类型
+
+| 参数名称 | 类型 | 是否必选 | 描述 |
+| -------- | ---- | -------- | ---- |
+| 无       | 无   | 无       | 无   |
+
+### 18.4. 返回示例
+
+成功：
+
+```json
+{
+  "code": 200,
+  "message": "成功",
+  "data": [
+    {
+      "id": 1,
+      "title": "小米电视4A 70英寸 4K超高清 HDR 二级能效 2GB+16GB L70M5-4A 内置小爱",
+      "imageUrl": "http://47.93.148.192:8080/0kICAaGuxAAKnO3DNDcY020.jpg",
+      "linkUrl": "http://item.atguigu.cn/21.html",
+      "sort": 0
+    },
+    {
+      "id": 3,
+      "title": "test",
+      "imageUrl": "http://47.93.148.192:8080/group1/MZcxyALfXOAAGJ0EtoY9k848.jpg",
+      "linkUrl": "http://item.atguigu.cn/21.html",
+      "sort": 0
+    },
+    {
+      "id": 2,
+      "title": "华为 HUAWEI P40 麒麟990 5G SoC芯片 5000万超感知徕卡三摄",
+      "imageUrl": "http://47.93.148.192:8080/group1/sklaALrngAAHGDqdpFtU741.jpg",
+      "linkUrl": "http://item.atguigu.cn/16.html",
+      "sort": 1
+    }
+  ],
+  "ok": true
+}
+```
 

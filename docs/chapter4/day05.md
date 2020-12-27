@@ -1,13 +1,59 @@
 # day05
 
 ## 今日任务
-	1). 自定义分页组件
-	2). Detail静态路由组件
-	3). Detail组件的动态显示
-	4). ImageList组件
-	5). Zoom组件
+	1. 排序搜索 
+	2. 自定义分页组件
+	3. Detail静态路由组件
+	4. Detail组件的动态显示
+	5. ImageList组件
+	6. Zoom组件
+
+
+
+## 排序搜索
+
+	排序的数据结构: order: '1:desc', // 排序方式  1: 综合,2: 价格 asc: 升序,desc: 降序  "1:desc"
+		oderFlag: '1' / '2'
+		orderType: 'asc' / 'desc
+		orderFlag:orderType
+	当前排序项? 
+		根据当前order的oderFlag来确定
+	当前排序方式?
+		根据当前order的orderType来确定
+	点击排序项切换排序
+		点击当前排序项: 切换排序方式(排序项不变)
+		点击非当前排序项: 切换排序项, 排序方式为降序
+	
+	注意: 如果不想把模块中的表达写得太长: 需要定义对应的计算属性或者方法
+
+
+
+## 响应式数据对象: 添加新属性和删除属性
+
+	data或state中的所有层次的属性数据都是响应式的(属性值发生变化, 界面就会自动更新)
+	响应式数据对象: data或state中对象类型的属性: 比如options
+	给响应式数据对象添加新属性
+		错误的写法：   不是响应式  ==> 不会自动更新界面
+			options.xxx = 'abc' 
+		正确的写法:  是响应式的 ==> 会自动更新界面
+			Vue.set( target, key, value )
+			vm.$set( target, key, value )
+	删除属性响应式数据对象的属性
+		错误的写法：   
+			delete options.xxx   vue内部不知道, 界面不会自动更新
+		正确的写法:  方法内部先删除属性, 再更新界面
+			Vue.delete( target, key )
+			vm.$delete( target, key )
+
+## 问题: 优化减少没必要的请求参数
+
+	原因: 当前的后台接口不需要空串参数或空数组参数
+	解决: 在提交请求前, 将""参数和空数组的参数数据删除
+
+
 
 ## 自定义分页组件
+
 	直接使用已定义好的组件
 		<Pagination 
 	      :currentPage="options.pageNo"
@@ -45,18 +91,19 @@
 							start = end - showPageNo + 1
 							if (start<1) start = 1
 						}
-						
-						
-		
+
+
+​						
+​		
 		模板页面根据props/data/computed动态显示
 			v-for/v-if/disabled
 			v-for与v-if优先级问题    面试问
-
+	
 		v-for与v-if的优先级   面试题
 	      v-for的优先级高, 先执行, 每个遍历都会执行v-if
 	      1). 将v-if判断的处理放在v-for父标签上: 只需要判断一次(原本是每个遍历的元素都会判断)  ==> 适用于判断与元素无关的情况
 	      2). 最好使用计算属性来去掉v-if  ===> 减少遍历的次数 ==> 适用于根据元素数据来判断的情况
-
+	
 		当用户操作时更新数据  ==> 更新界面
 			当当前组件更新数据后, 有可能需要通知父组件(使用什么技术? 自定义事件/函数props)
 			当父组件的数据更新后, 有可能需要通知子组件
@@ -69,7 +116,7 @@
 		订阅与发布: dep与watcher
 	双向(v-model="xxx"):
 		input事件监听: 将最新输入的数据保存到data中   this.xxx = event.target.value   // 数据代理
-
+	
 	数组响应式处理: 重写数组一系列更新元素的方法(调用原生方法 ==> 更新界面)
 
 ## 模板的数据来源
@@ -98,7 +145,7 @@
 	原因:  data/state中的数据初始值是一个空对象/空数组, 如果模板中直接写一个三层(a.b.c)表达式
 	解决1: 想办法不让detailInfo.categoryView的结果是undefined, 利用getters
 	解决2: 利用v-if来判断, 只有当有数据才解析显示,  ==> 不能使用v-show
-
+	
 	imageList[currentIndex].imgUrl    a.b.c  v-if="a.b"  v-show="a.b"
 
 ## 销售属性列表功能 (大家自己做)
@@ -108,16 +155,16 @@
 	数据: 
 		detailInfo中的spuSaleAttrList属性
 		isChecked属性为'1'时代表是当前的
-
+	
 	功能: 动态显示 / 交互
 	数据结构
 
 ## ImageList组件
 	使用swiper显示小图片轮播列表:
 		slidesPerView: 5,  // 一次显示5页
-      	slidesPerGroup: 5, // 每次翻动多少(5)页
+	  	slidesPerGroup: 5, // 每次翻动多少(5)页
 	使用currentIndex标识当前图片下标, 点击时更新它
-	
+
 ## Zoom组件
 	根据传入的imgUrl和bigUrl来动态显示中图和大图
 	放大镜效果的布局:

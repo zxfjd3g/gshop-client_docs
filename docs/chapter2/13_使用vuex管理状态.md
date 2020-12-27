@@ -5,7 +5,22 @@
 npm install vuex
 ```
 
-## 13.2. store/modules/home.js
+
+
+## 13.2. vuex的多模块编程
+
+- vuex单模块问题: 
+  - 需要的管理状态数据比较多, 那对应的mutations/actions模块就会变得比较
+  - 如果添加新的数据管理, 需要修改现在文件(不断向其添加内容) 
+- vuex多模块编程: 
+  - 对各个功能模块的数据分别进行管理, 这样更加具有扩展性
+- 什么时候需要用vuex多模块编程?  
+  - 需要vuex管理的数据比较多时使用
+
+
+
+## 13.3. store/modules/home.js
+
 ```js
 /* 
 vuex管理的home模块
@@ -53,7 +68,7 @@ export default {
 
 
 
-## 13.3. store/modules/home.js
+## 13.5. store/modules/user.js
 
 ```js
 /* 
@@ -71,7 +86,7 @@ export default {
 
 
 
-## 13.4. store/modules/index.js
+## 13.6. store/modules/index.js
 
 ```js
 /* 
@@ -89,7 +104,7 @@ export default {
 
 
 
-## 13.4. store/index.js
+## 13.7. store/index.js
 
 ```js
 /* 
@@ -108,7 +123,7 @@ export default new Vuex.Store({
 })
 ```
 
-## 13.5. 注册store
+## 13.8. 注册store
 - main.js
 ```js
 import store from './store'
@@ -120,6 +135,6 @@ new Vue({
 
  
 
-## 13.6. 使用调试工具查看state数据
+## 13.9. 使用调试工具查看state数据
 
 ![image-20201222212813157](./images/image-20201222212813157.png)

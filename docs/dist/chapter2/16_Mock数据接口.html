@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>16. Mock/模拟数据接口 | 尚品汇商城-前台PC</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="shortcut icon" type="image/x-icon" href="/gshop-client_docs/favicon.ico">
+    <meta name="description" content="尚硅谷前端研究院">
+    
+    <link rel="preload" href="/gshop-client_docs/assets/css/0.styles.9c560553.css" as="style"><link rel="preload" href="/gshop-client_docs/assets/js/app.5f23a05e.js" as="script"><link rel="preload" href="/gshop-client_docs/assets/js/2.1de92273.js" as="script"><link rel="preload" href="/gshop-client_docs/assets/js/26.fa802409.js" as="script"><link rel="prefetch" href="/gshop-client_docs/assets/js/10.4b49014d.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/11.0ddaf429.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/12.1006901a.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/13.de99247e.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/14.fe74ac8e.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/15.687fc095.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/16.e1f9cdd8.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/17.0d162914.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/18.e0310c7c.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/19.8996e4d1.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/20.7d2f2085.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/21.853d31e7.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/22.bc589ad8.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/23.f76fedab.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/24.f5e1c731.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/25.95796cfe.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/27.3a42e626.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/28.cdb20eaa.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/29.ea9c5e3d.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/3.6e3a2ee5.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/30.e5557093.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/31.8447b010.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/32.030f3e98.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/33.fe462830.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/34.55d87fdc.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/35.c983e407.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/36.870da3f4.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/37.5a9da179.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/38.0b4b0ab1.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/39.5aba5077.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/4.8aadd252.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/40.c5251222.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/41.fb3b50f4.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/42.5de43718.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/43.f934efca.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/44.6f2425ff.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/45.64f6d0f2.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/46.31d35044.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/47.52bcd8d8.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/48.53810795.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/49.6dea0952.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/5.fcf84bff.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/50.429f163c.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/6.af80b6c9.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/7.c7874304.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/8.981a2519.js"><link rel="prefetch" href="/gshop-client_docs/assets/js/9.c37184e1.js">
+    <link rel="stylesheet" href="/gshop-client_docs/assets/css/0.styles.9c560553.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/gshop-client_docs/" class="home-link router-link-active"><img src="/gshop-client_docs/logo.png" alt="尚品汇商城-前台PC" class="logo"> <span class="site-name can-hide">尚品汇商城-前台PC</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="http://www.atguigu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="http://www.gulixueyuan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  谷粒学院
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学习路线" class="dropdown-title"><span class="title">学习路线</span> <span class="arrow down"></span></button> <button type="button" aria-label="学习路线" class="mobile-dropdown-title"><span class="title">学习路线</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/web/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  前端
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/kecheng.shtml" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Java
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/bigdata/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  大数据
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="http://www.atguigu.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="http://www.gulixueyuan.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  谷粒学院
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="学习路线" class="dropdown-title"><span class="title">学习路线</span> <span class="arrow down"></span></button> <button type="button" aria-label="学习路线" class="mobile-dropdown-title"><span class="title">学习路线</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/web/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  前端
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/kecheng.shtml" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Java
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="http://www.atguigu.com/bigdata/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  大数据
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/gshop-client_docs/chapter1/01_准备.html" class="sidebar-link">项目开发前准备</a></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>应用开发详解</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/gshop-client_docs/chapter2/01_开启项目开发.html" class="sidebar-link">1. 开启项目开发</a></li><li><a href="/gshop-client_docs/chapter2/02_项目源码目录设计.html" class="sidebar-link">2. 项目源码目录设计</a></li><li><a href="/gshop-client_docs/chapter2/03_ESLint.html" class="sidebar-link">3. ESLint</a></li><li><a href="/gshop-client_docs/chapter2/04_使用git管理项目.html" class="sidebar-link">4. 使用git管理项目</a></li><li><a href="/gshop-client_docs/chapter2/05_Vue组件化.html" class="sidebar-link">5. Vue最基本编码</a></li><li><a href="/gshop-client_docs/chapter2/06_引入vue-router.html" class="sidebar-link">6. 引入vue-router</a></li><li><a href="/gshop-client_docs/chapter2/07_引入less预编译器.html" class="sidebar-link">7. 引入less预编译器</a></li><li><a href="/gshop-client_docs/chapter2/08_Header组件.html" class="sidebar-link">8. Header组件</a></li><li><a href="/gshop-client_docs/chapter2/09_Footer组件.html" class="sidebar-link">9. Footer组件</a></li><li><a href="/gshop-client_docs/chapter2/10_Home路由组件.html" class="sidebar-link">10. Home路由组件</a></li><li><a href="/gshop-client_docs/chapter2/11_后台应用.html" class="sidebar-link">11. 后台应用</a></li><li><a href="/gshop-client_docs/chapter2/12_前后台交互ajax.html" class="sidebar-link">12. 前后台交互ajax</a></li><li><a href="/gshop-client_docs/chapter2/13_使用vuex管理状态.html" class="sidebar-link">13. 使用vuex管理状态</a></li><li><a href="/gshop-client_docs/chapter2/14_异步显示分类列表 TypeNav.html" class="sidebar-link">14. 异步显示分类列表: TypeNav</a></li><li><a href="/gshop-client_docs/chapter2/15_动态显示广告轮播.html" class="sidebar-link">15. 动态显示广告轮播</a></li><li><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html" class="active sidebar-link">16. Mock/模拟数据接口</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_1-下载依赖包" class="sidebar-link">1. 下载依赖包</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_2-web应用前后端-台-分离" class="sidebar-link">2. Web应用前后端(台)分离</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_3-设计json数据结构" class="sidebar-link">3. 设计JSON数据结构</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_4-利用mockjs提供模拟数据" class="sidebar-link">4. 利用mockjs提供模拟数据</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_5-api-ajaxmock-js" class="sidebar-link">5. api/ajaxMock.js</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_6-api-index-js" class="sidebar-link">6. api/index.js</a></li><li class="sidebar-sub-header"><a href="/gshop-client_docs/chapter2/16_Mock数据接口.html#_7-vuex" class="sidebar-link">7. vuex</a></li></ul></li><li><a href="/gshop-client_docs/chapter2/17_利用Mock接口实现动态的Home.html" class="sidebar-link">16. 利用Mock接口实现动态的Home</a></li><li><a href="/gshop-client_docs/chapter2/18_Search路由.html" class="sidebar-link">17. Search路由</a></li><li><a href="/gshop-client_docs/chapter2/19_Detail路由.html" class="sidebar-link">19. Detail路由</a></li><li><a href="/gshop-client_docs/chapter2/20_AddCartSuccess路由.html" class="sidebar-link">20. AddCartSuccess路由</a></li><li><a href="/gshop-client_docs/chapter2/21_ShopCart路由.html" class="sidebar-link">21. ShopCart路由</a></li><li><a href="/gshop-client_docs/chapter2/22_注册与登陆路由.html" class="sidebar-link">22. 注册与登陆路由</a></li><li><a href="/gshop-client_docs/chapter2/23_导航守卫.html" class="sidebar-link">23. 导航守卫</a></li><li><a href="/gshop-client_docs/chapter2/24_订单与支付.html" class="sidebar-link">24. 订单与支付</a></li><li><a href="/gshop-client_docs/chapter2/25_其它.html" class="sidebar-link">25. 其它</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>相关文档</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>笔记列表</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_16-mock-模拟数据接口"><a href="#_16-mock-模拟数据接口" class="header-anchor">#</a> 16. Mock/模拟数据接口</h1> <h2 id="_1-下载依赖包"><a href="#_1-下载依赖包" class="header-anchor">#</a> 1. 下载依赖包</h2> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">npm</span> <span class="token function">install</span> mockjs
+</code></pre></div><h2 id="_2-web应用前后端-台-分离"><a href="#_2-web应用前后端-台-分离" class="header-anchor">#</a> 2. Web应用前后端(台)分离</h2> <ol><li>后台向前台提供API接口, 只负责数据的提供和计算，而完全不处理展现</li> <li>前台通过Http(Ajax)请求获取数据,　在浏览器端动态构建界面显示数据</li></ol> <h2 id="_3-设计json数据结构"><a href="#_3-设计json数据结构" class="header-anchor">#</a> 3. 设计JSON数据结构</h2> <h3 id="_1-理解json数据结构"><a href="#_1-理解json数据结构" class="header-anchor">#</a> 1) 理解JSON数据结构</h3> <ol><li>结构: 名称, 数据类型</li> <li>value</li> <li>value可以变, 但结构不能变</li></ol> <h3 id="_2-编写模拟json数据"><a href="#_2-编写模拟json数据" class="header-anchor">#</a> 2) 编写模拟JSON数据</h3> <ol><li>首页今日推荐数据: src/mock/recommends.json</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;imageUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/images/today02.png&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;imageUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/images/today01.png&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;imageUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/images/today03.png&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;imageUrl&quot;</span><span class="token operator">:</span> <span class="token string">&quot;/images/today04.png&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><ol start="2"><li>首页楼层数据: src/mock/floors.json</li></ol> <div class="language- extra-class"><pre class="language-text"><code>[
+  {
+    &quot;id|1-3&quot;: &quot;001&quot;,
+    &quot;name|1&quot;: [&quot;家用电器1&quot;, &quot;家用电器2&quot;, &quot;家用电器3&quot;],
+    &quot;keywords&quot;: [&quot;节能补贴&quot;, &quot;4K电视&quot;, &quot;空气净化器&quot;, &quot;IH电饭煲&quot;, &quot;滚筒洗衣机&quot;],
+    &quot;imgUrl&quot;: &quot;/images/floor-1-1.png&quot;,
+    &quot;navList&quot;: [
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;热门&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;大家电&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;生活电器&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;厨房电器&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;应季电器&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;空气/净水&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;高端电器&quot;
+      }
+    ],
+    &quot;carouselList&quot;: [
+      {
+        &quot;id&quot;: &quot;0011&quot;,
+        &quot;imageUrl&quot;: &quot;/images/floor-1-b01.png&quot;
+      },
+      {
+        &quot;id&quot;: &quot;0012&quot;,
+        &quot;imageUrl&quot;: &quot;/images/floor-1-b02.png&quot;
+      }
+    ],
+    &quot;recommendList&quot;: [
+      &quot;/images/floor-1-3.png&quot;,
+      &quot;/images/floor-1-2.png&quot;,
+      &quot;/images/floor-1-6.png&quot;,
+      &quot;/images/floor-1-5.png&quot;
+    ],
+    &quot;bigImg&quot;: &quot;/images/floor-1-4.png&quot;
+  },
+  {
+    &quot;id&quot;: &quot;002&quot;,
+    &quot;name&quot;: &quot;手机通讯&quot;,
+    &quot;keywords&quot;: [&quot;节能补贴2&quot;, &quot;4K电视2&quot;, &quot;空气净化器2&quot;, &quot;IH电饭煲2&quot;],
+    &quot;imgUrl&quot;: &quot;/images/floor-1-1.png&quot;,
+    &quot;navList&quot;: [{
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;热门2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;大家电2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;生活电器2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;厨房电器2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;应季电器2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;空气/净水2&quot;
+      },
+      {
+        &quot;url&quot;: &quot;#&quot;,
+        &quot;text&quot;: &quot;高端电器2&quot;
+      }
+    ],
+    &quot;carouselList&quot;: [{
+        &quot;id&quot;: &quot;0011&quot;,
+        &quot;imageUrl&quot;: &quot;/images/floor-1-b01.png&quot;
+      },
+      {
+        &quot;id&quot;: &quot;0012&quot;,
+        &quot;imageUrl&quot;: &quot;/images/floor-1-b02.png&quot;
+      },
+      {
+        &quot;id&quot;: &quot;0013&quot;,
+        &quot;imageUrl&quot;: &quot;/images/floor-1-b03.png&quot;
+      }
+    ],
+    &quot;recommendList&quot;: [
+      &quot;/images/floor-1-2.png&quot;,
+      &quot;/images/floor-1-3.png&quot;,
+      &quot;/images/floor-1-5.png&quot;,
+      &quot;/images/floor-1-6.png&quot;
+    ],
+    &quot;bigImg&quot;: &quot;/images/floor-1-4.png&quot;
+  }
+]
+</code></pre></div><div class="custom-block warning"><p class="custom-block-title">注意</p> <p>需要将相关的图片拷贝到 public/images目录下</p></div> <h2 id="_4-利用mockjs提供模拟数据"><a href="#_4-利用mockjs提供模拟数据" class="header-anchor">#</a> 4. 利用mockjs提供模拟数据</h2> <h3 id="_1-mockjs"><a href="#_1-mockjs" class="header-anchor">#</a> 1) Mockjs</h3> <p>用来拦截ajax请求, 生成随机数据返回</p> <h3 id="_2-学习"><a href="#_2-学习" class="header-anchor">#</a> 2) 学习</h3> <ol><li>http://mockjs.com/</li> <li>https://github.com/nuysoft/Mock</li></ol> <h3 id="_3-使用-mock-mockserver-js"><a href="#_3-使用-mock-mockserver-js" class="header-anchor">#</a> 3) 使用(mock/mockServer.js)</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/* 
+利用mockjs来mock数据接口
+*/</span>
+<span class="token keyword">import</span> Mock <span class="token keyword">from</span> <span class="token string">'mockjs'</span>
+<span class="token keyword">import</span> recommends <span class="token keyword">from</span> <span class="token string">'./recommends.json'</span>
+<span class="token keyword">import</span> floors <span class="token keyword">from</span> <span class="token string">'./floors.json'</span>
+
+<span class="token comment">// 提供今日推荐数据的接口</span>
+Mock<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span><span class="token string">'/mock/recommends'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    code<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> recommends
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 提供所有楼层数据的接口</span>
+Mock<span class="token punctuation">.</span><span class="token function">mock</span><span class="token punctuation">(</span><span class="token string">'/mock/floors'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    code<span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> floors
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'mockServer...'</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_5-api-ajaxmock-js"><a href="#_5-api-ajaxmock-js" class="header-anchor">#</a> 5. api/ajaxMock.js</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">/* 
+专门请求mock接口的axios封装
+*/</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+
+<span class="token keyword">const</span> mockAjax <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  baseURL<span class="token operator">:</span> <span class="token string">&quot;/mock&quot;</span><span class="token punctuation">,</span> <span class="token comment">// 路径前缀</span>
+  timeout<span class="token operator">:</span> <span class="token number">10000</span> <span class="token comment">// 请求超时时间</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+mockAjax<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token parameter"> </span><span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> config
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+mockAjax<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token parameter"> </span><span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> response<span class="token punctuation">.</span>data
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token function"> </span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token parameter"> </span><span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> mockAjax
+
+</code></pre></div><h2 id="_6-api-index-js"><a href="#_6-api-index-js" class="header-anchor">#</a> 6. api/index.js</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> mockAjax <span class="token keyword">from</span> <span class="token string">'./mockAjax'</span>
+
+<span class="token comment">// 获取广告轮播列表</span>
+<span class="token function-variable function">export const reqRecommends </span><span class="token operator">=</span><span class="token function"> </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span> mockAjax<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/recommends'</span><span class="token punctuation">)</span>
+<span class="token comment">// 获取首页楼层列表</span>
+<span class="token function-variable function">export const reqFloors </span><span class="token operator">=</span><span class="token function"> </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span> mockAjax<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/floors'</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="_7-vuex"><a href="#_7-vuex" class="header-anchor">#</a> 7. vuex</h2> <ul><li>store/modules/home.js</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> reqRecommends<span class="token punctuation">,</span> reqFloors <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/api'</span>
+
+<span class="token keyword">const</span> state <span class="token operator">=</span> <span class="token punctuation">{</span>
+  recommends<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 今日推荐数据的数组</span>
+  floors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// 所有楼层数据的数组</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> mutations <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* 
+  接收楼层列表
+  */</span>
+  <span class="token constant">RECEIVE_RECOMMENTS</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> recommends</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    state<span class="token punctuation">.</span>recommends <span class="token operator">=</span> recommends
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">/* 
+  接收楼层列表
+  */</span>
+  <span class="token constant">RECEIVE_FLOORS</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> floors</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    state<span class="token punctuation">.</span>floors <span class="token operator">=</span> floors
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">//异步获取所有楼层数据</span>
+  <span class="token keyword">async</span> <span class="token function">getRecommends</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>commit<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">reqRecommends</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'RECEIVE_RECOMMENTS'</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">//异步获取所有楼层数据</span>
+  <span class="token keyword">async</span> <span class="token function">getFloors</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>commit<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">reqFloors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'RECEIVE_FLOORS'</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> getters <span class="token operator">=</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  state<span class="token punctuation">,</span>
+  actions<span class="token punctuation">,</span>
+  mutations<span class="token punctuation">,</span>
+  getters
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/gshop-client_docs/chapter2/15_动态显示广告轮播.html" class="prev">
+        15. 动态显示广告轮播
+      </a></span> <span class="next"><a href="/gshop-client_docs/chapter2/17_利用Mock接口实现动态的Home.html">
+        16. 利用Mock接口实现动态的Home
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/gshop-client_docs/assets/js/app.5f23a05e.js" defer></script><script src="/gshop-client_docs/assets/js/2.1de92273.js" defer></script><script src="/gshop-client_docs/assets/js/26.fa802409.js" defer></script>
+  </body>
+</html>

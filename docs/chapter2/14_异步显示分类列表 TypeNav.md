@@ -1,22 +1,22 @@
 # 14. 异步显示分类列表: TypeNav
 
-## 14.1. 重难点说明
+## 1. 重难点列表
 
 1. 组件与vuex交互
-2. 事件控制二三级分类列表的显示与隐藏
-3. 优化高频事件触发处理: 利用lodash进行函数节流处理
-4. 优化减小打包文件: 对lodash库实现按需引入 
-5. 解决快速移出后可能显示第一个分类的子分类列表的bug
-6. 优化减少组件对象数量: 使用编程式导航代替声明式导航
-7. 优化事件处理效率: 利用事件委托
-8. 利用标签自定义属性携带动态数据
+2. 优化减少组件对象数量: 使用编程式导航代替声明式导航
+3. 优化事件处理效率: 利用事件委托
+4. 利用标签自定义属性携带动态数据
+5. 事件控制二三级分类列表的显示与隐藏
+6. 优化高频事件触发处理: 利用lodash进行函数节流处理
+7. 优化减小打包文件: 对lodash库实现按需引入
+8. 解决快速移出后可能显示第一个分类的子分类列表的bug
 9. 控制一级列表的显示与隐藏
 10. 一级列表显示隐藏的过渡效果
-12. 合并分类query参数与搜索的关键字params参数
+11. 合并分类query参数与搜索的关键字params参数
 
 
 
-## 14.2. 下载依赖包
+## 2. 下载依赖包
 
 ```shell
 npm i lodash
@@ -24,7 +24,7 @@ npm i lodash
 
 
 
-## 14.2. 编码实现
+## 3. 编码实现
 
 1. components/TypeNav/index.vue
 
@@ -51,7 +51,6 @@ npm i lodash
                     :data-categoryName="c1.categoryName"
                     :data-category1Id="c1.categoryId"
                   >{{c1.categoryName}}</a>
-                  <!-- <router-link :to="`/search?category1Id=${c1.categoryId}&categoryName=${c1.categoryName}`">{{c1.categoryName}}</router-link> -->
                 </h3>
                 <div class="item-list clearfix">
                   <div class="subitem">
@@ -62,7 +61,6 @@ npm i lodash
                           :data-categoryName="c2.categoryName"
                           :data-category2Id="c2.categoryId"
                         >{{c2.categoryName}}</a>
-                        <!-- <router-link :to="`/search?category2Id=${c2.categoryId}&categoryName=${c2.categoryName}`">{{c2.categoryName}}</router-link> -->
                       </dt>
                       <dd>
                         <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
@@ -71,7 +69,6 @@ npm i lodash
                             :data-categoryName="c3.categoryName"
                             :data-category3Id="c3.categoryId"
                           >{{c3.categoryName}}</a>
-                          <!-- <router-link :to="`/search?category3Id=${c3.categoryId}&categoryName=${c3.categoryName}`">{{c3.categoryName}}</router-link> -->
                         </em>
                       </dd>
                     </dl>
