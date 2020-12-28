@@ -254,6 +254,8 @@ import {mapGetters} from 'vuex'
 
 ##  5. 通用的分页组件Pagination
 
+![image-20201227214102809](./images/image-20201227214102809.png)
+
 ### 1) 静态组件
 
 ```vue
@@ -323,26 +325,33 @@ import {mapGetters} from 'vuex'
 ```vue
 <template>
   <div class="pagination">
-    <!-- 当前页码等于1就不可操作 -->
-    <button :disabled="mcPage===1" @click="changeCurrentPage(mcPage-1)">上一页</button>
-    <!-- 只有start大于1 -->
-    <button v-if="startEnd.start>1" @click="changeCurrentPage(1)">1</button>
-    <!-- 只有start大于2 -->
+    <button :disabled="myCurrentPage===1" @click="setCurrentPage(myCurrentPage-1)">上一页</button>
+    <!-- start要大于1 -->
+    <button v-if="startEnd.start>1" @click="setCurrentPage(1)">1</button>
+    <!-- start要大于2 -->
     <button disabled v-if="startEnd.start>2">···</button>
+    <!-- 
+      v-for与v-if的优先级   面试题
+      v-for的优先级高, 先执行, 每个遍历都会执行v-if
+      1). 将v-if判断的处理放在v-for父标签上: 只需要判断一次(原本是每个遍历的元素都会判断)  ==> 适用于判断与元素无关的情况
+      2). 最好使用计算属性来去掉v-if  ===> 减少遍历的次数 ==> 适用于根据元素数据来判断的情况
+    -->
+    <!-- 
+      <span v-if="isShow"> 
+        <button v-for="item in startEndArr"  :class="{active: item===myCurrentPage}" @click="setCurrentPage(item)">{{item}}</button>
+      </span> 
+    -->
 
-    <!-- 连续页码 -->
-    <button v-for="item in startEnd.end" v-if="item>=startEnd.start" :key="item"
-      @click="changeCurrentPage(item)" :class="{active: mcPage===item}">
-      {{item}}
-    </button>
-    <!-- 只有end<totalPages-1才显示  -->
+    <!-- <button v-for="item in startEnd.end" v-if="item>=startEnd.start" 
+      :class="{active: item===myCurrentPage}" @click="setCurrentPage(item)">{{item}}</button> -->
+
+    <button v-for="item in startEndArr"  :class="{active: item===myCurrentPage}" @click="setCurrentPage(item)">{{item}}</button>
+    
     <button disabled v-if="startEnd.end<totalPages-1">···</button>
-    <!-- 只有end<totalPages才显示 -->
-    <button v-if="startEnd.end<totalPages" @click="changeCurrentPage(totalPages)">{{totalPages}}</button>
-    <!-- 当前页码等于总页码就不可操作 -->
-    <button :disabled="mcPage===totalPages" @click="changeCurrentPage(mcPage+1)">下一页</button>
-    <!-- 总记录数 -->
-    <button style="margin-left: 30px">共 {{total}} 条</button>
+    <button v-if="startEnd.end<totalPages" @click="setCurrentPage(totalPages)">{{totalPages}}</button>
+    <button :disabled="myCurrentPage===totalPages" @click="setCurrentPage(myCurrentPage+1)">下一页</button>
+    
+    <button style="margin-left: 30px" disabled>共 {{total}} 条</button>
   </div>
 </template>
 
@@ -353,134 +362,147 @@ import {mapGetters} from 'vuex'
     props: {
       currentPage: { // 当前页码
         type: Number,
-        default: 1
+        default: 1,
+        // required: true
       },
-      pageSize: { // 每页数量
+			total: { // 总数量
         type: Number,
-        default: 5
+        default: 0,
+        // required: true
       },
-      total: { // 总数量
+			pageSize: { // 每页数量
         type: Number,
-        default: 0
+        default: 10
       },
-      showPageNo: { // 连续页码数
+			showPageNo: { // 连续页码数 (一般是奇数)
         type: Number,
-        default: 5
+        default: 5,
+        validator: function (value) {
+          return value%2===1
+        }
       }
     },
 
     data () {
       return {
-        mcPage: this.currentPage  // 保存自己的当前页码
+        // 将传入当前页码作为内部的当前页码
+        myCurrentPage: this.currentPage || 1,
+        isShow: true,
+      }
+    },
+
+    watch: {
+      // 当接收到新的currentPage(本质就是Sesarch组件中的options.pageNo变化了)
+      currentPage (value) {
+        // this.myCurrentPage = this.currentPage
+        this.myCurrentPage = value
       }
     },
 
     computed: {
-
       /* 
-      总页码数
-      依赖数据: 
-        总数量: total    
-        每页数量: pageSize  
+      总页数
       */
       totalPages () {
-        // 取出依赖数据   31 5 ==> 7
-        const {total, pageSize} = this
-        // 返回计算后的结果
-        return Math.ceil(total/pageSize)
+        const {total, pageSize} = this   // 31 10 ==> 4
+        return Math.ceil(total/pageSize) // 需要向上取整
       },
 
       /* 
-      返回连续页码的开始页码(start)与结束页码(end): 
-      比如: {start: 3, end: 7}
-      依赖数据:
-          当前页码: mcPage
-          最大连续页码数: showPageNo
-          总页码数: totalPages
-      注意:
-          start的最小值为1
-          end的最大值为totalPages
-          start与end之间的最大差值为showPageNo-1
+      计算出包含从start到end的数组
+      */
+      startEndArr () {
+        const {start, end} = this.startEnd
+        const arr = []
+        for (let i = start; i <=end; i++) {
+          arr.push(i)
+        }
+        return arr
+      },
+
+
+      /* 
+      计算出连续页码的start和end [3, 7]  {start: 3, end: 7}
+      start最小值为1
+      end最大值为totalPages
+      start到end的数量最大是showPageNo: 
+        end = start + showPageNo - 1
+        start = end - showPageNo + 1
       */
       startEnd () {
-        const {mcPage, showPageNo, totalPages} = this
+        // 取出依赖(相关)数据
+        const {myCurrentPage, showPageNo, totalPages} = this
 
+        let start, end
+        // 计算产生需要的结果数据
         // 计算start
         /* 
-        mcPage showPageNo totalPages     start到end
-          4        5          10           23[4]56
+        myCurrentPage, showPageNo, totalPages
+          4                 5           8          23[4]56
         */
-        let start = mcPage - Math.floor(showPageNo/2)  // 4 - 2
+        start = myCurrentPage - Math.floor(showPageNo/2) // 4 - 2
         /* 
-        mcPage showPageNo totalPages  start到end
-          2        5          10         1[2]345
-        但start上面计算得到是: 0
+        myCurrentPage, showPageNo, totalPages
+          2                 5           8          1[2]345
+        start上面算出的是0, 应该为1
         */
-        // start的最小值是1, 如果小于1, 修正为1
+        // 当当前页码比较小时, start值就会小于1, 小于了最小值
         if (start<1) {
           start = 1
         }
 
         // 计算end
+        // 根据start和showPageNo来计算end
         /* 
-        mcPage showPageNo totalPages     start到end
-          4        5          10           23[4]56
+        myCurrentPage, showPageNo, totalPages
+          2                 5           8          1[2]345
+        start上面算出为1
         */
-        // start与end之间的最大差值为showPageNo-1
-        let end = start + showPageNo - 1    // 2 + 5 -1
+        end = start + showPageNo -1  // 1 + 5 - 1
 
-
+        //  end最大值为totalPages, 如果超过了, 修正为totalPages
         /* 
-        mcPage showPageNo totalPages     start到end
-          4        5          5           123[4]5
-        但上面计算的end为6, 应该为5    ==> end = totalPages
-                   start为2, 应该为1  ==> start = end - showPageNo + 1
+        myCurrentPage, showPageNo, totalPages
+          8                5           9        567[8]9
+        start上面算出为 6  ==> 9 - 5 + 1 = 5
+        end上面算出为  10  ==> 9
         */
-        // 如果end超过了totalPages, 修正为totalPages
-        if (end > totalPages) {
+        if (end>totalPages) {
+          // 修正end
           end = totalPages
-          // 根据最大连续页码修正start
-          start = end - showPageNo + 1
-
+          // 修正start
+          start = end - showPageNo + 1  // 前提是totalPages>=showPageNo
           /* 
-           mcPage showPageNo totalPages     start到end
-              4        5          4           123[4]
-            上面计算
-                start为0  应该为1
-                end为4   没问题
+          myCurrentPage, showPageNo, totalPages
+            4                6           5        123[4]5
+          start上面算出为 5 - 6 + 1 = 0
+          end上面算出为  5
           */
-          // start不能小于最小值1
+          // 如果totalPages<showPageNo ==> 上面的计算start是小于1的
           if (start<1) {
             start = 1
           }
         }
-
-        return {start, end}
-      }
-    },
-
-    watch: {
-      /*
-      当接收的currentPage发生改变时调用 
-       */
-      currentPage (value) {
-        // 将当前页码指定为外部传入的值
-        this.mcPage = value
+        // 返回结果数据
+        return {
+          start,
+          end
+        }
       }
     },
 
     methods: {
-
       /* 
-      将当前页码改为指定页码
+      设置新的当前页码
       */
-      changeCurrentPage (page) {
-        // 修改当前页码
-        this.mcPage = page
-        // 通知外部父组件
+      setCurrentPage (page) {
+        if (page===this.myCurrentPage) return
+        // 更新内部的当前页码
+        this.myCurrentPage = page
+        // 通知父组件当前页码变化了
         this.$emit('currentChange', page)
       }
-    },
+    }
   }
 </script>
 ```
@@ -948,7 +970,7 @@ toSearch () {
 8. 在index页面中引入此图标的在线样式链接: 
 
    ```html
-   <link rel="stylesheet" href="http://at.alicdn.com/t/font_1766283_dobjk7xxze7.css">
+   <link rel="stylesheet" href="http://at.alicdn.com/t/font_1810440_cbws3ohdat5.css">
    ```
 
 9. 在组件中使用
@@ -956,3 +978,6 @@ toSearch () {
 - <i class=”iconfont icondown”>
 
 - 可以通过color改变颜色, 通过font-size改变大小
+
+
+
